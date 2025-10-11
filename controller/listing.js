@@ -27,20 +27,28 @@ module.exports.showListing = async(req,res) => {
 };
 
 
-//Create Route
-module.exports.createListing=async (req, res) => {
-    
-    let url=req.file.path;
-    let filename=req.file.filename;
-    const newListing = new Listing(req.body.listing);
-    newListing.owner=req.user._id;
-    newListing.image={url,filename};
-   let savedlisting= await newListing.save();
-   console.log(savedlisting)
-    req.flash("success","New Listing Created")
-    res.redirect("/listings");
-}  
-
+//Create Route - Alternative version (allows no image)
+module.exports.createListing = async (req, res, next) => {
+    try {
+        const newListing = new Listing(req.body.listing);
+        newListing.owner = req.user._id;
+        
+        // Check if file exists before accessing properties
+        if (req.file) {
+            let url = req.file.path;
+            let filename = req.file.filename;
+            newListing.image = { url, filename };
+        }
+        // If no file, the image field will remain undefined
+        
+        let savedlisting = await newListing.save();
+        console.log(savedlisting);
+        req.flash("success", "New Listing Created");
+        res.redirect("/listings");
+    } catch (error) {
+        next(error);
+    }
+}
 //Edit Route
 module.exports.renderEditForm = async (req, res) => {
   let { id } = req.params;
