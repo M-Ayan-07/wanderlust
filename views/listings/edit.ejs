@@ -25,17 +25,20 @@
 
       </div>
 
+
+            <!-- Current Image Display - FIXED -->
       <div class="mb-3">
+        <label class="form-label">Current Image</label><br>
         <img src="<%= OriginalImageUrl %>" alt="Current Image" style="max-width: 300px; max-height: 200px;"/>
       </div>
       
-    <div class="mb-3">
-  <img 
-    src="<%= listing.image ? listing.image : " https://www.rewariproperties.com/public/uploads/newsphotos/advantages-of-living-in-a-villa.jpg" %>" 
-    alt="Current Image" 
-    style="max-width: 300px; max-height: 200px;"
-  />
-</div>
+      <!-- New Image Upload -->
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload New Image (Optional)</label>
+        <input name="listing[image]" type="file" class="form-control" />
+      </div>
+
+
     <div class="row">
       <div class="mb-3 col-md-4">
          <label for="price" class="form-label">Price</label>

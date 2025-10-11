@@ -27,7 +27,7 @@ module.exports.showListing = async(req,res) => {
 };
 
 
-//Create Route - Alternative version (allows no image)
+//Create Route - WITH DEFAULT IMAGE
 module.exports.createListing = async (req, res, next) => {
     try {
         const newListing = new Listing(req.body.listing);
@@ -38,8 +38,13 @@ module.exports.createListing = async (req, res, next) => {
             let url = req.file.path;
             let filename = req.file.filename;
             newListing.image = { url, filename };
+        } else {
+            // Set default image when no image is uploaded
+            newListing.image = { 
+                url: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG90ZWwlMjByb29tfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+                filename: "default-listing-image" 
+            };
         }
-        // If no file, the image field will remain undefined
         
         let savedlisting = await newListing.save();
         console.log(savedlisting);
@@ -49,7 +54,7 @@ module.exports.createListing = async (req, res, next) => {
         next(error);
     }
 }
-//Edit Route
+//Edit Route - UPDATED FOR DEFAULT IMAGE HANDLING
 module.exports.renderEditForm = async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id);
@@ -57,11 +62,18 @@ module.exports.renderEditForm = async (req, res) => {
     req.flash("error","Cannot find that listing");
     return res.redirect("/listings");
   }
-  let OriginalImageUrl =listing.image.url;
-  OriginalImageUrl = OriginalImageUrl.replace("/upload","/upload/w_250");
-  res.render("listings/edit.ejs", { listing ,OriginalImageUrl });
+  
+  // Handle default image case
+  let OriginalImageUrl = listing.image.url;
+  if (!OriginalImageUrl.includes('cloudinary')) {
+    // If it's a default image, don't apply Cloudinary transformation
+    OriginalImageUrl = listing.image.url;
+  } else {
+    OriginalImageUrl = OriginalImageUrl.replace("/upload","/upload/w_250");
+  }
+  
+  res.render("listings/edit.ejs", { listing, OriginalImageUrl });
 };
-
 
 //Update Route
 module.exports.updateListing = async (req, res) => {
