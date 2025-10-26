@@ -6,7 +6,12 @@ module.exports.listingSchema = joi.object({
         description :joi.string().required(),
         location :joi.string().required(),
         country :joi.string().required(),
-        price:joi.number().required().min(0),  
+        price:joi.number().required().min(0),
+        category: joi.string().valid(
+            'Trending', 'Rooms', 'Mountains', 'Beach', 'Nearby', 
+            'Castles', 'Cabins', 'Camping', 'National parks', 
+            'Farms', 'Unique stays'
+        ).required(), // ADD THIS LINE
         image:joi.string().allow("",null),
     }).required()
 });

@@ -36,7 +36,7 @@ module.exports.validateListing = (req,res,next) => {
    
    if(error) {
     let ermsg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(400, errmsg);
+    throw new ExpressError(400, ermsg);
    } else {
     next();
    }
