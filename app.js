@@ -31,7 +31,6 @@ const reviewRouter = require("./routes/review.js");
 // const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const MONGO_URL = process.env.ATLASDB_URL;
 
-
 main()
   .then(() => {
     console.log("connected to db");
@@ -41,8 +40,17 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  try {
+    await mongoose.connect(MONGO_URL, {
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    });
+    console.log("Connected to MongoDB Atlas successfully");
+  } catch (err) {
+    console.log("MongoDB connection error:", err);
+  }
 }
+
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));

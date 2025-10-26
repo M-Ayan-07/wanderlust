@@ -68,6 +68,26 @@
       />
       <div class="invalid-feedback">please enter location</div>
     </div>
+
+    <!-- ADDED CATEGORY FIELD -->
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select name="listing[category]" id="category" class="form-control" required>
+        <option value="">Select Category</option>
+        <option value="Trending">Trending</option>
+        <option value="Rooms">Rooms</option>
+        <option value="Mountains">Mountains</option>
+        <option value="Beach">Beach</option>
+        <option value="Nearby">Nearby</option>
+        <option value="Castles">Castles</option>
+        <option value="Cabins">Cabins</option>
+        <option value="Camping">Camping</option>
+        <option value="National parks">National parks</option>
+        <option value="Farms">Farms</option>
+        <option value="Unique stays">Unique stays</option>
+      </select>
+      <div class="invalid-feedback">please select a category</div>
+    </div>
      
     <br><br>
       <button class="btn btn-dark add-btn mt-3">Add</button>
@@ -75,4 +95,4 @@
     </div>
     </div>
     
-  </body>
+</body>
