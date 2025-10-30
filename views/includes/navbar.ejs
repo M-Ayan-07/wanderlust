@@ -1,83 +1,206 @@
-<style>
-  .search-btn{
+<style>.search-btn{
     background-color: #fe424d;
     color: white;
     border-radius: 25px;
-    padding: 0 1rem;
-  }
-  .search-btn:hover{
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    border: none;
+    white-space: nowrap;
+}
+.search-btn:hover{
     background-color: #fe424d;
     color: white;
     opacity: 0.8;
-  }
-  .search-btn i{
-    display:inline;
+}
+.search-btn i{
+    display: inline;
     margin-right: 0.5rem;
-  }
-  .search-input{
+}
+.search-input{
     border-radius: 25px;
     padding: 0.5rem 1rem;
-  }
-  
-  /* Mobile responsive fixes */
-  @media (max-width: 768px) {
+    margin-right: 1rem;
+    border: 1px solid #ddd;
+}
+.lsting{
+    margin-left: 0.25rem;
+    border-radius: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #fe424d;
+    color:white;
+    padding: 0.25rem 0.75rem;
+    font-size: 1rem;
+}
+.home-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #333 !important;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 22px;
+    transition: all 0.3s ease;
+    border: 1px solid #dddddd;
+    background: white;
+    white-space: nowrap;
+}
+
+.home-link:hover {
+    background-color: #f7f7f7;
+    border-color: #b0b0b0;
+    color: #000 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.home-icon {
+    font-size: 1rem;
+    color: #ff385c;
+}
+
+/* Navbar container fixes */
+.navbar .container-fluid {
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.navbar-brand-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.search-form-container {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.search-form {
+    min-width: 100px;
+    max-width: 300px;
+
+    display: flex;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+   
+    
+    .navbar-brand-container {
+        order: 1;
+    }
+    
+    .search-form-container {
+        order: 3;
+        flex: 0 0 100%;
+        margin-top: 10px;
+    }
+    
     .navbar-collapse {
-      margin-top: 1rem;
+        order: 2;
     }
     
-    .search-form-mobile {
-      margin: 1rem 0;
+    .search-form {
+        max-width: 61%;
+        
     }
     
-    .nav-links-mobile {
-      flex-direction: column;
-      gap: 0.5rem;
+    .search-input {
+        margin-right: 0.5rem;
+        flex: 1;
     }
     
-    .navbar-nav.ms-auto {
-      margin-top: 1rem;
+    .search-btn {
+        margin-right: 0;
+        flex-shrink: 0;
     }
-  }
+    
+    .home-link {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+   .search-form {
+        max-width: 95%;
+        min-width: unset;
+   
+       
+        
+    }
+    .search-input {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .search-btn {
+        padding: 0.1rem 0.4rem;
+        
+    }
+  
+    .search-btn i {
+        margin-right: 0;
+    }
+    
+    .home-link span {
+        display: none;
+    }
+    
+    .home-link {
+        padding: 6px 8px;
+    }
+}
+  
 </style>
 
 <nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/listings">
-      <i class="fa-regular fa-compass"></i>
-      <span class="d-none d-sm-inline">Wanderlust</span>
+  <div class="d-flex align-items-center">
+    <h1 class="navbar-brand"  style="font-weight: 800; color: #ff385c; font-size: 1.5rem; text-decoration: none;">
+        airbnb
+    </h1>
+    <div style="border-left: 1px solid #ddd; height: 24px; margin: 0 15px;"></div>
+     <a class="home-link" href="/listings">
+        <i class="fa-solid fa-house home-icon"></i>
+        Home
     </a>
-    
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <!-- Search Form - Shows on desktop, hidden on mobile -->
-      <div class="navbar-nav me-auto d-none d-lg-flex">
-        <form class="d-flex" role="search" action="/listings/search" method="GET">
-          <input class="form-control me-2 search-input" type="search" placeholder="Search destination" name="destination">
-          <button class="btn search-btn" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <span class="d-none d-md-inline">Search</span>
-          </button>
-        </form>
-      </div>
+</div>  &nbsp;&nbsp;&nbsp;
 
-      <!-- Search Form for Mobile -->
-      <div class="d-lg-none search-form-mobile">
-        <form class="d-flex" role="search" action="/listings/search" method="GET">
-          <input class="form-control me-2 search-input" type="search" placeholder="Search destination" name="destination">
-          <button class="btn search-btn" type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
-      </div>
+<!-- Search Form - ALWAYS VISIBLE -->
+<div class="navbar-nav flex-grow-1 justify-content-center">
+  <form class="d-flex search-form" action="/listings/search" method="GET">
+    <input class="form-control search-input" type="search" placeholder="Search destination" name="destination">
+    <button class="btn search-btn" type="submit">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span class="d-none d-md-inline">Search</span>
+    </button>
+  </form>
+</div>
+
+
+     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+
 
       <!-- Navigation Links -->
       <div class="navbar-nav ms-auto nav-links-mobile">
         <a class="nav-link" href="/listings/new">
           <i class="fa-solid fa-plus d-lg-none"></i>
-          <span class="d-none d-lg-inline">Airbnb your home</span>
+          <span class="d-none d-lg-inline lsting" >Add New Listing</span>
         </a>
         
         <% if(!currentUser){ %>

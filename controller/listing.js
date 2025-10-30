@@ -6,6 +6,16 @@ module.exports.index = async (req, res) => {
     res.render("listings/index.ejs", { allListings });
 };
 
+// Get listings by category
+module.exports.getListingsByCategory = async (req, res) => {
+    const { category } = req.params;
+    const listings = await Listing.find({ category: category });
+    res.render("listings/index.ejs", { 
+        allListings: listings,
+        currentCategory: category 
+    });
+};
+
 // Search route - UPDATED with messages
 module.exports.searchListings = async (req, res) => {
     const { category, destination } = req.query;
@@ -13,42 +23,32 @@ module.exports.searchListings = async (req, res) => {
     let query = {};
     let message = "";
     
-    // Search by category (from filter buttons)
     if (category) {
         query.category = category;
-        message = `Showing results for "${category}"`;
+       
     }
     
-    // Search by destination (from search input)
     if (destination) {
         query.$or = [
             { location: { $regex: destination, $options: 'i' } },
             { country: { $regex: destination, $options: 'i' } },
             { title: { $regex: destination, $options: 'i' } }
         ];
-        message = `Showing results for "${destination}"`;
+       
     }
     
-    // If no search parameters, redirect to all listings
     if (!category && !destination) {
         return res.redirect("/listings");
     }
 
     const allListings = await Listing.find(query);
     
-    // If no listings found, update message
-    if (allListings.length === 0) {
-        if (category) {
-            message = `No listings found for "${category}". Try another category!`;
-        } else if (destination) {
-            message = `No listings found for "${destination}". Try another location!`;
-        }
-        req.flash("error", message);
-    } else {
-        req.flash("success", message);
-    }
+   
 
-    res.render("listings/index.ejs", { allListings });
+    res.render("listings/index.ejs", { 
+        allListings,
+        isSearchPage: true  // Flag to indicate search results page
+    });
 };
 
 

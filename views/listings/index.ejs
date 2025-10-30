@@ -1,6 +1,9 @@
 <% layout("layouts/boilerplate") %>
 
- 
+    
+
+
+
     <!-- <h3>All Listings</h3> -->
     <!-- <form method="GET" action="/listings/new">
       <button>Create New Listing</button>
@@ -203,12 +206,12 @@
      }
     });
 
-    // Filter click functionality
-    document.querySelectorAll('.filters').forEach(filter => {
-        filter.addEventListener('click', function() {
-            const category = this.querySelector('p').textContent.trim();
-            const categoryParam = category.replace(/\s+/g, '').toLowerCase();
-            window.location.href = `/listings/search?category=${categoryParam}`;
-        });
+  // Filter click functionality
+document.querySelectorAll('.filters').forEach(filter => {
+    filter.addEventListener('click', function() {
+        const category = this.querySelector('p').textContent.trim();
+        // Use the search route with category parameter
+        window.location.href = `/listings/search?category=${encodeURIComponent(category)}`;
     });
+});
   </script>
