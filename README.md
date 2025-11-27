@@ -2,6 +2,8 @@
 <p align="center"> The Ultimate Platform for Curated Global Listings and Authentic Experiences </p>
 
 
+![wanderlust](https://github.com/user-attachments/assets/77a14243-c62b-4e79-8448-2451ecb581cb)
+
 Wesbite Link(https://wanderlust-1jl6.onrender.com/listings)
 
 <!-- 
