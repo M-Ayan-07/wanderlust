@@ -63,31 +63,9 @@
   max-width: 250px;
 }
 
-/* Mobile responsive */
-@media (max-width>768px) {
-  .search-form {
-    min-width: 200px;
-    margin-top: 10px;
-  }
-  
-  .search-input {
-    font-size: 0.9rem;
-  }
-}
 
-/* Small mobile devices */
-@media (max-width > 329px) {
-  .search-form {
-    max-width: 30%;
-    min-width: 10%;
-    margin-top: 10px;
-    
-  }
-  
-  .search-input::placeholder {
-    font-size: 0.4rem;
-  }
-}
+
+
 
 </style>
 
@@ -95,7 +73,7 @@
   <div class="container-fluid">
   <div class="d-flex align-items-center">
     <h1 class="navbar-brand"  style="font-weight: 800; color: #ff385c; font-size: 1.5rem; text-decoration: none;">
-        airbnb
+       Wanderlust
     </h1>
     <div style="border-left: 1px solid #ddd; height: 24px; margin: 0 15px;"></div>
      <a class="home-link" href="/listings">
@@ -119,7 +97,7 @@
   <form class="d-flex search-form" role="search" action="/listings/search" method="GET">
     <input class="form-control me-2 search-input" type="search" placeholder="Search destination" name="destination">
     <button class="btn search-btn" type="submit">
-      <i class="fa-solid fa-magnifying-glass"></i>
+      <i class="fa-solid fa-magnifying-glass" ></i>
       <span class="d-none d-md-inline">Search</span>
     </button>
   </form>
@@ -128,7 +106,7 @@
       <!-- Navigation Links -->
       <div class="navbar-nav ms-auto nav-links-mobile">
         <a class="nav-link" href="/listings/new">
-          <i class="fa-solid fa-plus d-lg-none"></i>
+          <div ><i class="fa-solid fa-plus d-lg-none"></i></div>
           <span class="d-none d-lg-inline lsting" >Add New Listing</span>
         </a>
         

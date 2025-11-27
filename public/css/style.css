@@ -1,9 +1,12 @@
 /* ===== VARIABLES ===== */
+
+
 :root {
     --primary-color: #fe424d;
     --secondary-color: #ff6b6b;
     --text-dark: #222222;
     --text-light: #555555;
+   
     --bg-light: #ebebeb;
     --border-light: #ebebeb;
     --white: #ffffff;
@@ -21,6 +24,7 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
+    
 }
 
 .container {
